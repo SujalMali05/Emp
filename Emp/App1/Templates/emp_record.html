@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Record</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 10px;
+        }
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            border: 1px solid #ccc;
+            margin: auto;
+        }
+        h4 {
+            margin: 50px 400px;
+        }
+        h2 {
+            margin: 40px 130px;
+        }
+        th, td {
+            width: 20%;
+            padding: 8px;
+            text-align: center;
+            border-bottom: 1px solid #ccc;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="/emp/"> <h2>+ Add New Record</h2> </a>
+
+        <table>
+            <thead>
+                <tr>
+                <th>Employee Name</th>
+                <th>Employee Age</th>
+                <th>Salary</th>
+                <th>Update Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in aid %}
+                <form action="/update/{{i.id}}" method="post">
+                    {% csrf_token %}
+                <tr>
+                    <td>
+                    <input type="text" name="Emp_name" value="{{i.Emp_name}}">
+                    </td>
+                    <td>
+                    <input type="number" name="Emp_age" value="{{i.Emp_age}}">
+                    </td>
+                    <td>
+                    <input type="number" name="Salary" value="{{i.Salary}}">
+                    </td>
+                    <td>
+                        <button type="submit">Update</button>
+                        <button>
+                            <a href="/delete/{{i.id}}">Delete</a>
+                        </button>
+                    </td>
+                </tr>
+                </form>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    <h4>Total Of All Employee Salary Is : {{Ts}}</h4>
+
+</body>
+</html>
